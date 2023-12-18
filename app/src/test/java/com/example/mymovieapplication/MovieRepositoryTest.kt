@@ -1,45 +1,20 @@
-package com.example.mymovieapplication.repository
+package com.example.mymovieapplication
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.annotation.VisibleForTesting
-import com.example.mymovieapplication.R
-import com.example.mymovieapplication.domain.DataSource
 import com.example.mymovieapplication.domain.Movie
-import com.example.mymovieapplication.domain.Repository
+import com.example.mymovieapplication.repository.MovieRepository
 import com.example.mymovieapplication.utils.createLocalDate
-import com.example.mymovieapplication.utils.toImmutableList
-import java.time.LocalDate
+import org.junit.Test
+
+import org.junit.Assert.*
 
 /**
- * A [DataSource] for [Movie]s
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
  */
-class MovieDataSource : DataSource<Movie> {
-    private val movieList = mutableListOf<Movie>()
-    override fun saveItem(item: Movie) {
-        movieList.add(item)
-    }
+class MovieRepositoryTest {
 
-    override fun getItems(): List<Movie> {
-        return movieList.toImmutableList()
-    }
-
-    override fun deleteItem(item: Movie) {
-        TODO("Not yet implemented - no need to, this class won't ever use this")
-    }
-}
-
-/**
- * A [Repository] for handling [Movie] items, delegating persistence to an internal
- * implicitly constructed [MovieDataSource]
- */
-class MovieRepository(private val dataSource: MovieDataSource = MovieDataSource()) :
-    Repository<Movie>(dataSource) {
-
-    /**
-     * Method for prepopulating the [Repository] with data from the task assignment details file
-     */
-    private fun populateRepository() {
+    private fun createMovieRepoInternalMovieList(): List<Movie> {
         val tenet = Movie(
             R.drawable.tenet,
             "Tenet",
@@ -101,31 +76,13 @@ villainous Ultron from enacting his terrible plan.""",
             "https://www.youtube.com/watch?v=tmeOjFno6Do"
         )
 
-        // now that we have all these movies instantiated, we can save them to the datasource
-        addItem(tenet)
-        addItem(spiderman)
-        addItem(knivesOut)
-        addItem(guardiansOfTheGalaxy)
-        addItem(avengers)
+        return listOf(tenet, spiderman, knivesOut, guardiansOfTheGalaxy, avengers)
     }
 
-
-
-    companion object {
-        @JvmStatic
-        private lateinit var _instance: MovieRepository
-
-        @JvmStatic
-        @Synchronized
-        public fun getInstance(): MovieRepository {
-            synchronized(this) {
-                if (::_instance.isInitialized.not()) {
-                    _instance = MovieRepository()
-                    _instance.populateRepository()
-                }
-
-                return _instance
-            }
-        }
+    @Test
+    fun when_movierepo_is_constructed_then_it_contains_all_expected_movies() {
+        val movieRepoItems = MovieRepository.getInstance().getAllItems()
+        val listsEqual = movieRepoItems.equals(createMovieRepoInternalMovieList())
+        assertTrue(listsEqual)
     }
 }

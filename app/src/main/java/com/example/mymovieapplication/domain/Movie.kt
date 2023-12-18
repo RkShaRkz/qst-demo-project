@@ -1,5 +1,6 @@
 package com.example.mymovieapplication.domain
 
+import androidx.annotation.DrawableRes
 import java.net.URL
 import java.time.LocalDate
 
@@ -7,6 +8,8 @@ import java.time.LocalDate
  * Domain class representing a movie with all of it's details
  */
 data class Movie(
+    @DrawableRes
+    val drawable: Int,
     val title: String, 
     val description: String, 
     val rating: Float,
