@@ -20,6 +20,10 @@ class MovieDataSource : DataSource<Movie> {
     override fun getItems(): List<Movie> {
         return movieList.toImmutableList()
     }
+
+    override fun deleteItem(item: Movie) {
+        TODO("Not yet implemented - no need to, this class won't ever use this")
+    }
 }
 
 /**

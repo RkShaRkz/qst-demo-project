@@ -13,6 +13,11 @@ interface DataSource<T> {
      * Returns all saved data in this DataSource
      */
     fun getItems(): List<T>
+
+    /**
+     * Removes the [item] from the data source and persists it
+     */
+    fun deleteItem(item: T)
 }
 
 /**
@@ -25,5 +30,9 @@ abstract class Repository<T>(private val dataSource: DataSource<T>) {
     }
     internal fun getAllItems(): List<T> {
         return dataSource.getItems()
+    }
+
+    internal fun removeItem(item: T) {
+        dataSource.deleteItem(item)
     }
 }
