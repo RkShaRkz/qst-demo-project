@@ -29,6 +29,9 @@ class MovieDataSource : DataSource<Movie> {
 class MovieRepository(private val dataSource: MovieDataSource = MovieDataSource()) :
     Repository<Movie>(dataSource) {
 
+    /**
+     * Method for prepopulating the [Repository] with data from the task assignment details file
+     */
     private fun populateRepository() {
         val tenet = Movie(
             "Tenet",
@@ -94,6 +97,10 @@ villainous Ultron from enacting his terrible plan.""",
         addItem(avengers)
     }
 
+    /**
+     * Dispatcher helper method for instantiating [LocalDate]s from the arguments, that delegates
+     * to either [createLocalDate_postO] for API26+ devices or [createLocalDate_preO] for earlier devices
+     */
     private fun createLocalDate(year: Int, month: Int, dayOfMonth: Int): LocalDate {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createLocalDate_postO(year, month, dayOfMonth)
@@ -102,12 +109,18 @@ villainous Ultron from enacting his terrible plan.""",
         }
     }
 
+    /**
+     * API26+ version of [createLocalDate]
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createLocalDate_postO(year: Int, month: Int, dayOfMonth: Int): LocalDate {
         // For API26+
         return LocalDate.of(year, month, dayOfMonth)
     }
 
+    /**
+     * API 16 to 25 (inclusive) version of [createLocalDate]
+     */
     private fun createLocalDate_preO(year: Int, month: Int, dayOfMonth: Int): LocalDate {
         // Kind of a hack but this method works fine for Pre-Oreo devices
         // For API 16 to 25, inclusive
