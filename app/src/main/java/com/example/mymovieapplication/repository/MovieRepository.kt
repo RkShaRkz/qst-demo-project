@@ -1,15 +1,11 @@
 package com.example.mymovieapplication.repository
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.annotation.VisibleForTesting
 import com.example.mymovieapplication.R
 import com.example.mymovieapplication.domain.DataSource
 import com.example.mymovieapplication.domain.Movie
 import com.example.mymovieapplication.domain.Repository
 import com.example.mymovieapplication.utils.createLocalDate
 import com.example.mymovieapplication.utils.toImmutableList
-import java.time.LocalDate
 
 /**
  * A [DataSource] for [Movie]s
@@ -108,7 +104,6 @@ villainous Ultron from enacting his terrible plan.""",
         addItem(guardiansOfTheGalaxy)
         addItem(avengers)
     }
-
 
 
     companion object {
