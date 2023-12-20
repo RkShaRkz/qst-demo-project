@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tenet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/item_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/item_details"
+        app:layout_constraintLeft_toRightOf="@id/item_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_image"
+        tools:text="Test movie" />
+
+    <TextView
+        android:id="@+id/item_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/item_watchlist_barrier"
+        app:layout_constraintLeft_toRightOf="@id/item_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_title"
+        tools:text="2h 30min - Genre1, Genre2, Genre3" />
+
+    <TextView
+        android:id="@+id/item_watchlist_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/item_image"
+        app:layout_constraintLeft_toRightOf="@id/item_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_details"
+        android:visibility="gone"
+        tools:text="On my watchlist"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/item_watchlist_barrier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barrierAllowsGoneWidgets="true"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="item_watchlist_label"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
