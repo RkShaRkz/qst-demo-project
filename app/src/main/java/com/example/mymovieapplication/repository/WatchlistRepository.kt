@@ -8,7 +8,7 @@ import com.example.mymovieapplication.utils.toImmutableList
 import com.example.mymovieapplication.utils.toImmutableSet
 
 class WatchlistDataSource(val ctx: Context) : DataSource<Movie> {
-    private val movieSet = mutableSetOf<Movie>()
+    internal val movieSet = mutableSetOf<Movie>()
     private val sharedPref = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
 
     init {
@@ -86,6 +86,17 @@ class WatchlistDataSource(val ctx: Context) : DataSource<Movie> {
 
 class WatchlistRepository(private val ctx: Context, private val dataSource: WatchlistDataSource = WatchlistDataSource(ctx)) : Repository<Movie>(dataSource) {
 
+    public fun isMovieOnWatchlist(movie: Movie) : Boolean {
+        return dataSource.movieSet.contains(movie)
+    }
+
+    public fun addToWatchlist(movie: Movie) {
+        dataSource.saveItem(movie)
+    }
+
+    public fun removeFromWatchlist(movie: Movie) {
+        dataSource.deleteItem(movie)
+    }
 
     companion object {
         @JvmStatic

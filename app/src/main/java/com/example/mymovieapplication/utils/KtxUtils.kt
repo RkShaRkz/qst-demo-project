@@ -13,6 +13,31 @@ fun <T> Set<T>.toImmutableSet(): Set<T> {
     return Collections.unmodifiableSet(this)
 }
 
+fun LocalDate.toParsableString(): String {
+    val monthString = if (monthValue < 10) {
+        "0${monthValue}"
+    } else {
+        "${monthValue}"
+    }
+
+    val dayString = if (dayOfMonth < 10) {
+        "0${dayOfMonth}"
+    } else {
+        "${dayOfMonth}"
+    }
+
+    return "${year}-${monthString}-${dayString}"
+}
+
+fun String.parseLocalDateFromParsableString(): LocalDate {
+    val strings = this.splitToSequence("-")
+    val year = strings.elementAt(0).toInt()
+    val month = strings.elementAt(1).toInt()
+    val day = strings.elementAt(2).toInt()
+
+    return createLocalDate(year, month, day)
+}
+
 /**
  * Dispatcher helper method for instantiating [LocalDate]s from the arguments, that delegates
  * to either [createLocalDate_postO] for API26+ devices or [createLocalDate_preO] for earlier devices

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/tenet"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_large"
+        app:layout_constraintBottom_toTopOf="@id/item_details"
+        app:layout_constraintLeft_toRightOf="@id/item_image"
+        app:layout_constraintTop_toTopOf="@id/item_image"
+        android:textSize="@dimen/textsize_xlarge"
+        android:textStyle="bold"
+        tools:text="Test movie" />
+
+    <TextView
+        android:id="@+id/item_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/item_watchlist_barrier"
+        app:layout_constraintLeft_toLeftOf="@id/item_title"
+        app:layout_constraintTop_toBottomOf="@id/item_title"
+        android:textSize="@dimen/textsize_normal"
+        android:textColor="@android:color/darker_gray"
+        tools:text="2h 30min - Genre1, Genre2, Genre3, lorem ipsum sit doloret amet blablablablabla more words" />
+
+    <TextView
+        android:id="@+id/item_watchlist_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/item_image"
+        app:layout_constraintLeft_toLeftOf="@id/item_title"
+        app:layout_constraintTop_toBottomOf="@id/item_details"
+        android:visibility="gone"
+        android:text="On my watchlist"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/item_watchlist_barrier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barrierAllowsGoneWidgets="true"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="item_watchlist_label"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

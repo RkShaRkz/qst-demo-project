@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#ABABABAB</color>
+    <color name="watchlist_button_text_gray">#FF7F7F7F</color>
+    <color name="watchlist_button_background_gray">#F7E0E0E0</color>
 </resources>
