@@ -1,0 +1,20 @@
+<!-- res/drawable/button_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background with white fill and rounded corners -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white" />
+            <corners android:radius="18dp" /> <!-- Adjust radius for rounded corners -->
+        </shape>
+    </item>
+    <!-- Black border for the rectangle -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="4dp"
+                android:color="@color/black" /> <!-- Border color -->
+            <corners android:radius="18dp" /> <!-- Match the radius for rounded corners -->
+        </shape>
+    </item>
+</layer-list>
