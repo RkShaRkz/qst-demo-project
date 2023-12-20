@@ -11,12 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapplication.R
+import com.example.mymovieapplication.SharedViewModel
 
 class FragmentMovieList : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MovieAdapter
     private lateinit var viewModel: MovieListViewModel
+    private lateinit var activityViewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,8 +29,12 @@ class FragmentMovieList : Fragment() {
         recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 
         viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
+        activityViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
-        adapter = MovieAdapter(listOf())
+        adapter = MovieAdapter(
+            listOf(),
+            { clickedMovie -> activityViewModel.onMovieClicked(clickedMovie) }
+        )
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 

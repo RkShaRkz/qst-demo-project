@@ -12,7 +12,10 @@ import com.example.mymovieapplication.R
 import com.example.mymovieapplication.domain.Movie
 import com.example.mymovieapplication.repository.WatchlistRepository
 
-class MovieAdapter(private var movieList: List<Movie>) :
+class MovieAdapter(
+    private var movieList: List<Movie>,
+    private val movieClickListener: (Movie) -> Unit
+) :
     ListAdapter<Movie, MovieAdapter.MovieViewHolder>(Movie.MovieItemDiffCallback) {
 
 
@@ -22,7 +25,9 @@ class MovieAdapter(private var movieList: List<Movie>) :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val movie = getItem(position)
+        holder.bind(movie)
+        holder.itemView.setOnClickListener { movieClickListener(movie) }
     }
 
     override fun onCurrentListChanged(
