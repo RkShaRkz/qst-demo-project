@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/item_image"
-        android:layout_width="200dp"
-        android:layout_height="300dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
         android:scaleType="fitCenter"
         android:src="@drawable/tenet"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,6 +26,8 @@
         app:layout_constraintBottom_toTopOf="@id/item_details"
         app:layout_constraintLeft_toRightOf="@id/item_image"
         app:layout_constraintTop_toTopOf="@id/item_image"
+        android:textSize="@dimen/textsize_xlarge"
+        android:textStyle="bold"
         tools:text="Test movie" />
 
     <TextView
@@ -32,6 +37,8 @@
         app:layout_constraintBottom_toTopOf="@+id/item_watchlist_barrier"
         app:layout_constraintLeft_toLeftOf="@id/item_title"
         app:layout_constraintTop_toBottomOf="@id/item_title"
+        android:textSize="@dimen/textsize_normal"
+        android:textColor="@android:color/darker_gray"
         tools:text="2h 30min - Genre1, Genre2, Genre3, lorem ipsum sit doloret amet blablablablabla more words" />
 
     <TextView

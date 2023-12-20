@@ -10,5 +10,7 @@
     <dimen name="margin_xlarge">32dp</dimen>
     <dimen name="margin_xxlarge">48dp</dimen>
 
+    <dimen name="textsize_normal">16dp</dimen>
     <dimen name="textsize_large">24dp</dimen>
+    <dimen name="textsize_xlarge">32dp</dimen>
 </resources>

@@ -37,10 +37,9 @@ class FragmentMovieList : Fragment() {
             Log.d(LOGTAG, "Obtained movie list: ${movies}")
             // Update the UI with the new list of movies
             adapter.submitList(movies)
-//            adapter.setItems(movies)
-//            adapter.notifyDataSetChanged()
         })
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(DividerItemDecoration(requireContext()))
 
         return view
     }

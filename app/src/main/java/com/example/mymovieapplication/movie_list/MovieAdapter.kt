@@ -22,18 +22,7 @@ class MovieAdapter(private var movieList: List<Movie>) :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-//        val movie = movieList[position]
-//        holder.bind(movie)
         holder.bind(getItem(position))
-    }
-
-//    override fun getItemCount(): Int {
-//        super.getItemCount()
-//        return movieList.size
-//    }
-
-    fun setItems(newMovieList: List<Movie>) {
-        movieList = newMovieList
     }
 
     override fun onCurrentListChanged(
@@ -54,7 +43,7 @@ class MovieAdapter(private var movieList: List<Movie>) :
 
         fun bind(movie: Movie) {
             image.setImageResource(movie.drawable)
-            title.text = movie.title
+            title.text = "${movie.title} (${movie.releaseDate.year})"
             details.text = "${movie.duration} - ${movie.genre}"
             watchlistLabel.visibility =
                 if (WatchlistRepository.getInstance(itemView.context).isMovieOnWatchlist(movie)) {
