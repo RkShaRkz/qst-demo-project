@@ -11,21 +11,39 @@ import com.example.mymovieapplication.repository.MovieRepository
  */
 class SharedViewModel : ViewModel() {
 
-    private val _movieList = MutableLiveData<List<Movie>>()
-    val movieList: LiveData<List<Movie>> get() = _movieList
+    private val _navigationStream = MutableLiveData<NavigationInfo>()
+    val navigationStream: LiveData<NavigationInfo> = _navigationStream
+
+    private var navigationState: NavigationState = NavigationState.MOVIE_LIST
+    fun getNavigationState(): NavigationState {
+        return navigationState
+    }
+
+    fun setNavigationState(newState: NavigationState) {
+        navigationState = newState
+    }
 
     // Initialize the ViewModel and fetch data
     init {
-        loadMovies()
-    }
-
-    // Data loading method
-    private fun loadMovies() {
-        _movieList.value = MovieRepository.getInstance().getAllItems()
+        navigationState = NavigationState.MOVIE_LIST
+        _navigationStream.postValue(NavigationInfo(NavigationState.MOVIE_LIST, false, null))
     }
 
     public fun onMovieClicked(movie: Movie) {
-        TODO("not implemented yet but clicked on movie ${movie}")
+        navigationState = NavigationState.MOVIE_DETAILS
+        _navigationStream.postValue(NavigationInfo(NavigationState.MOVIE_DETAILS, false, movie))
     }
+
+    public fun onBackPressed() {
+        navigationState = NavigationState.MOVIE_LIST
+        _navigationStream.postValue(NavigationInfo(NavigationState.MOVIE_LIST, true, null))
+    }
+
+    public enum class NavigationState { MOVIE_LIST, MOVIE_DETAILS }
+    data class NavigationInfo(
+        val navigationState: NavigationState,
+        val isBackPressed: Boolean,
+        val navigationExtraData: Movie?
+    )
 }
 

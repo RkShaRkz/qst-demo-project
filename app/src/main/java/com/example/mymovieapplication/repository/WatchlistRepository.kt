@@ -90,6 +90,14 @@ class WatchlistRepository(private val ctx: Context, private val dataSource: Watc
         return dataSource.movieSet.contains(movie)
     }
 
+    public fun addToWatchlist(movie: Movie) {
+        dataSource.saveItem(movie)
+    }
+
+    public fun removeFromWatchlist(movie: Movie) {
+        dataSource.deleteItem(movie)
+    }
+
     companion object {
         @JvmStatic
         lateinit var instance: WatchlistRepository

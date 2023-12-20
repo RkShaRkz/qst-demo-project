@@ -7,4 +7,8 @@
 
     <string name="genre">Genre</string>
     <string name="release_date">Release date</string>
+    <string name="max_rating">/10</string>
+    <string name="add_to_watchlist">Add to Watchlist</string>
+    <string name="remove_from_watchlist">Remove from Watchlist</string>
+    <string name="watch_trailer">Watch trailer</string>
 </resources>

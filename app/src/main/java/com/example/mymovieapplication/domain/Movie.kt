@@ -1,7 +1,11 @@
 package com.example.mymovieapplication.domain
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
+import com.example.mymovieapplication.utils.parseLocalDateFromParsableString
+import com.example.mymovieapplication.utils.toParsableString
 import java.net.URL
 import java.time.LocalDate
 
@@ -18,8 +22,23 @@ data class Movie(
     val genre: String,
     val releaseDate: LocalDate,
     val trailerLink: String
-) {
+) : Parcelable {
     val trailerURL: URL = URL(trailerLink)
+
+
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readFloat(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!.parseLocalDateFromParsableString(),
+        parcel.readString()!!
+    ) {
+    }
+
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -55,4 +74,31 @@ data class Movie(
             return newItem == oldItem
         }
     }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(drawable)
+        parcel.writeString(title)
+        parcel.writeString(description)
+        parcel.writeFloat(rating)
+        parcel.writeString(duration)
+        parcel.writeString(genre)
+        parcel.writeString(releaseDate.toParsableString())
+        parcel.writeString(trailerLink)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Movie> {
+        override fun createFromParcel(parcel: Parcel): Movie {
+            return Movie(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Movie?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+
 }
