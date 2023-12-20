@@ -1,6 +1,7 @@
 package com.example.mymovieapplication.movie_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,14 +30,22 @@ class FragmentMovieList : Fragment() {
 
         adapter = MovieAdapter(listOf())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
+
 
         // Observe changes in the movieList LiveData
         viewModel.movieList.observe(viewLifecycleOwner, Observer { movies ->
+            Log.d(LOGTAG, "Obtained movie list: ${movies}")
             // Update the UI with the new list of movies
             adapter.submitList(movies)
+//            adapter.setItems(movies)
+//            adapter.notifyDataSetChanged()
         })
+        recyclerView.adapter = adapter
 
         return view
+    }
+
+    companion object {
+        private const val LOGTAG = "FragmentMovieList"
     }
 }

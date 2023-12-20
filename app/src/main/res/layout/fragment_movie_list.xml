@@ -23,10 +23,10 @@
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginRight="@dimen/margin_large"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/movies_label"
         app:layout_constraintTop_toBottomOf="@id/movies_label" />
 

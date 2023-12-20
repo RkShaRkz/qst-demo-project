@@ -1,11 +1,11 @@
 package com.example.mymovieapplication.movie_list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapplication.R
@@ -13,7 +13,8 @@ import com.example.mymovieapplication.domain.Movie
 import com.example.mymovieapplication.repository.WatchlistRepository
 
 class MovieAdapter(private var movieList: List<Movie>) :
-    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieItemDiffCallback) {
+    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(Movie.MovieItemDiffCallback) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
@@ -21,12 +22,27 @@ class MovieAdapter(private var movieList: List<Movie>) :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie = movieList[position]
-        holder.bind(movie)
+//        val movie = movieList[position]
+//        holder.bind(movie)
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return movieList.size
+//    override fun getItemCount(): Int {
+//        super.getItemCount()
+//        return movieList.size
+//    }
+
+    fun setItems(newMovieList: List<Movie>) {
+        movieList = newMovieList
+    }
+
+    override fun onCurrentListChanged(
+        previousList: MutableList<Movie>,
+        currentList: MutableList<Movie>
+    ) {
+        Log.d(LOGTAG, "previousList = ${previousList}\tcurrentList = ${currentList}\tmovieList = ${movieList}")
+        super.onCurrentListChanged(previousList, currentList)
+        movieList = currentList
     }
 
     // ViewHolder class
@@ -49,11 +65,7 @@ class MovieAdapter(private var movieList: List<Movie>) :
         }
     }
 
-    object MovieItemDiffCallback : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean = oldItem == newItem
-
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
-            oldItem == newItem
-
+    companion object {
+        private const val LOGTAG = "MovieAdapter"
     }
 }

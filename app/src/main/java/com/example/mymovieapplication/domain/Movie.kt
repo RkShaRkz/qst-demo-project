@@ -1,6 +1,7 @@
 package com.example.mymovieapplication.domain
 
 import androidx.annotation.DrawableRes
+import androidx.recyclerview.widget.DiffUtil
 import java.net.URL
 import java.time.LocalDate
 
@@ -10,8 +11,8 @@ import java.time.LocalDate
 data class Movie(
     @DrawableRes
     val drawable: Int,
-    val title: String, 
-    val description: String, 
+    val title: String,
+    val description: String,
     val rating: Float,
     val duration: String,
     val genre: String,
@@ -45,5 +46,13 @@ data class Movie(
         return result
     }
 
+    object MovieItemDiffCallback : DiffUtil.ItemCallback<Movie>() {
+        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+            return newItem.title == oldItem.title
+        }
 
+        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+            return newItem == oldItem
+        }
+    }
 }
